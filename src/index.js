@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Redux, { createStore } from 'redux';
-import { store, TodoApp } from './components/App';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { TodoApp } from './components/App';
+import { todos, visibilityFilter } from './reducers/reducers';
 import './assets/index.css';
 
-// const { createStore } = Redux;
-// const store = createStore(todoApp);
+const reducers = combineReducers({
+  todos,
+  visibilityFilter
+});
 
-const render = () => {
-  ReactDOM.render(
-    <TodoApp
-      {...store.getState()}
-    />,
+ReactDOM.render(
+    <Provider store={createStore(reducers)}>
+      <TodoApp />
+    </Provider>,
     document.getElementById('root')
-  );
-};
+);
 
-store.subscribe(render);
-render();
+// store.subscribe(render);
+// render();
