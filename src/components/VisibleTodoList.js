@@ -1,53 +1,20 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import toggleTodo from '../action/action_creators';
-// import toggleTodo from '../action/action_creators';
+import { toggleTodo } from '../action/action_creators';
+import TodoList from './TodoList';
 
 // VISIBLETODOLIST COMPONENT
-const Todo = ({
-  onClick,
-  completed,
-  text
-}) => (
-    <li
-        onClick={onClick}
-        style={{
-          textDecoration:
-            completed ?
-              'line-through' :
-              'none'
-        }}>
-        {text}
-      </li>
-);
-
-const TodoList = ({
-  todos,
-  onTodoClick
-}) => (
-  <ul>
-    {todos.map(todo =>
-      <Todo
-        key={todo.id}
-        {...todo}
-        onClick={() => onTodoClick(todo.id)}
-      />
-    )}
-  </ul>
-);
-
 const getVisibleTodos = (
   todos,
   filter
 ) => {
   switch (filter) {
-    case 'SHOW_ALL':
+    case 'all':
       return todos;
-    case 'SHOW_COMPLETED':
+    case 'completed':
       return todos.filter(
         t => t.completed
       );
-    case 'SHOW_ACTIVE':
+    case 'active':
       return todos.filter(
         t => !t.completed
       );
@@ -56,11 +23,10 @@ const getVisibleTodos = (
   }
 };
 
-
-const mapStateToTodoListProps = (state) => ({
+const mapStateToTodoListProps = (state, ownProps) => ({
     todos: getVisibleTodos(
       state.todos,
-      state.visibilityFilter
+      ownProps.filter
     ),
 });
 
@@ -69,6 +35,7 @@ const mapDispatchToTodoListProps = (dispatch) => ({
       dispatch(toggleTodo(id))
     },
 });
+
 const VisibleTodoList = connect(
   mapStateToTodoListProps,
   mapDispatchToTodoListProps,
