@@ -1,31 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// import { AddTodo } from './AddTodo';
+// import { VisibleTodoList } from './VisibleTodoList';
+// import { Footer } from './Footer';
+import { addTodo, toggleTodo, setVisibilityFilter } from '../action/action_creators';
 // import logo from '../assets/logo.svg';
 import '../assets/App.css';
-
-// ACTION CREATORS
-let nextTodoId = 0;
-const addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
-  };
-};
-
-const toggleTodo = (id) => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
-  };
-};
-
-const setVisibilityFilter = (filter) => {
-  return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  };
-};
 
 // ADDTODO COMPONENT
 let AddTodo = ({ dispatch }) => {

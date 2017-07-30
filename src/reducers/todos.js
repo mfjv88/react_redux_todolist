@@ -1,4 +1,4 @@
-const todo = (state, action) => {
+const todo = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return {
@@ -19,7 +19,7 @@ const todo = (state, action) => {
   }
 };
 
-export const todos = (state = [], action) => {
+const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -35,14 +35,4 @@ export const todos = (state = [], action) => {
   }
 };
 
-export const visibilityFilter = (
-  state = 'SHOW_ALL',
-  action
-) => {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter;
-    default:
-      return state;
-  }
-};
+export default todos;

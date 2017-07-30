@@ -1,23 +1,18 @@
+import { v4 } from 'node-uuid';
+
 // ACTION CREATORS
-let nextTodoId = 0;
-export const addTodo = (text) => {
-  return {
+export const addTodo = (text) => ({
     type: 'ADD_TODO',
-    id: nextTodoId++,
+    id: v4(),
     text
-  };
-};
+});
 
-export const toggleTodo = (id) => {
-  return {
+export const toggleTodo = (id) => ({
     type: 'TOGGLE_TODO',
-    id
-  };
-};
+    id,
+});
 
-export const setVisibilityFilter = (filter) => {
-  return {
+export const setVisibilityFilter = (filter) => ({
     type: 'SET_VISIBILITY_FILTER',
-    filter
-  };
-};
+    filter,
+});

@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { TodoApp } from './components/App';
-import { todos, visibilityFilter } from './reducers/reducers';
+import todoApp_r from './reducers/index';
+import { loadState, saveState } from './localStorage';
+import throttle from 'lodash/throttle';
 import './assets/index.css';
 
-const reducers = combineReducers({
-  todos,
-  visibilityFilter
-});
+const persistedState = loadState();
+const store = createStore(
+  todoApp_r,
+  persistedState
+);
+
+store.subscribe(throttle(() => {
+  saveState({
+    todos: store.getState().todos
+  });
+}, 1000));
 
 ReactDOM.render(
-    <Provider store={createStore(reducers)}>
+    <Provider store={store}>
       <TodoApp />
     </Provider>,
     document.getElementById('root')

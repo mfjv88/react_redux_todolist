@@ -20,4 +20,6 @@ let AddTodo = ({ dispatch }) => {
     </div>
   );
 };
-export default AddTodo = connect()(AddTodo);
+AddTodo = connect()(AddTodo);
+
+export default AddTodo;
