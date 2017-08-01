@@ -9,9 +9,7 @@ import '../assets/App.css';
 const TodoApp = ({ filter }) => (
     <div>
       <AddTodo />
-      <VisibleTodoList
-        filter={filter || 'all'}
-      />
+      <VisibleTodoList />
       <Footer />
     </div>
   );
